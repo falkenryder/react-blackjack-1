@@ -23,7 +23,10 @@ export default function GenerateDeck() {
     }
 
     setDeck(shuffledDeck);
+
   };
+
+
 
   return (
     <>

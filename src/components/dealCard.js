@@ -47,28 +47,20 @@ export function DealCard(props) { // this is a named export
           {dealersHand.length > 0 && (
             <>
               {dealersHand.map((card, index) => (
-                <div key={index} className="card">
+                <div key={index} className="card" data-testid="dealersHand">
                   <h1 className="value">{card.rank}</h1>
                   <h1 className="suit">{card.suit}</h1>
                 </div>
               ))}
             </>
           )}
-          {/* {dealersHand.length > 0 && (
-              <>
-              <div className={`card`}>
-                <h1 className="value">{dealersHand[1].rank}</h1>
-                <h1 className="suit">{dealersHand[1].suit}</h1>
-              </div>
-              </>
-            )} */}
         </div>
         {/* Players Hand: */}
         <div className="card-container">
             {playersHand.length > 0 && (
                 <>
                   {playersHand.map((card, index) => (
-                    <div key={index} className="card">
+                    <div key={index} className="card" data-testid="playersHand">
                       <h1 className="value">{card.rank}</h1>
                       <h1 className="suit">{card.suit}</h1>
                     </div>
