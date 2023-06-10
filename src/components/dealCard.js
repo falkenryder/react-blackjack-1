@@ -56,7 +56,7 @@ export function DealCard(props) { // this is a named export
                   <h1 className="suit">{card.suit}</h1>
                 </div>
               ))}
-              <h1>Dealers Score: {dealersScore}</h1>
+              <h1 data-testid="dealersScore">Dealers Score: {dealersScore}</h1>
             </>
           )}
         </div>
@@ -70,7 +70,7 @@ export function DealCard(props) { // this is a named export
                       <h1 className="suit">{card.suit}</h1>
                     </div>
                   ))}
-                  <h1>My Score: {playerScore}</h1>
+                  <h1 data-testid="playersScore">My Score: {playerScore}</h1>
                 </>
               )}
         </div>

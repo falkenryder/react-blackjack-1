@@ -11,7 +11,7 @@ export default function CalculateScore(hand) {
         score += 11;
       }
     } else {
-      score += parseInt(card.rank);
+      score += parseInt(card.rank); // this converts a string to an integer
     }
   });
   return score;
