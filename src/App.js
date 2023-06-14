@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
 import deckJson from './deck.json';
-import Wallet from './components/Wallet';
-import Hand from './components/Hand';
-import Controls from './components/Controls';
+import Wallet from 'src/components/Wallet';
+import Hand from 'src/components/Hand';
+import Controls from 'src/components/Controls';
 
 export default function App() {
   const data = JSON.parse(JSON.stringify(deckJson));
