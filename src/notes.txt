@@ -1,6 +1,0 @@
-[1] Initialise a deck of 52 cards [x]
-[2] From that deck, pull 2 cards for the dealer, and 2 for the player
-[3] Display the player's cards, and the dealer's first card
-[4] Ask the player if they want to hit or stand
-[5] If they hit, deal them another card
-[6] If they stand, deal the dealer another card if dealer's score is <17

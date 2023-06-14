@@ -1,6 +1,9 @@
 .App {
   text-align: center;
-  background-color: rgb(234,29,98);
+  background-image: url('../assets/bj-background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   height: 100vh;
 }
 
@@ -55,4 +58,29 @@
 .stand-btn {
   margin-left: 30px;
 
+}
+
+.message-container {
+  min-height: 40px;
+  margin-bottom: 27vh;
+}
+
+.message-container h1{
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+/* Container styling */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Divide the container into 3 equal columns */
+  gap: 20px;
+}
+
+.grid-container:first-of-type {
+  margin-bottom: 8vh;
+}
+
+.grid-container .message-container {
+  grid-column: 2;
 }
