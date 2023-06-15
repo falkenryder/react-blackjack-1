@@ -17,6 +17,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.15.1
+          cache: npm
 
       - name: Install Dependencies
         run: npm ci
@@ -24,13 +25,18 @@ jobs:
       - name: Test
         run: npm test -- --watchAll=false --coverage=false --json > output.json
 
+      - name: Run ESLint
+        run: eslint src --ext .js,.jsx --format json > eslint.json
+
       - name: Concatenate JSON Payloads
         run: |
           tail -n +4 output.json > test_results.json
           test_results=$(cat test_results.json)
-          payload=$(jq --argjson test "$test_results" '. + {test: $test}' <<EOF
+          style_results=$(cat eslint.json)
+          payload=$(jq --argjson test "$test_results" --argjson style "$style_results" '. + {test: $test, style: $style}' <<EOF
           {
             "repo_name": "${{ github.repository }}",
+            "language" : "javascript",
             "url": "${{ github.event.repository.url }}"
           }
           EOF
