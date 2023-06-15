@@ -27,6 +27,7 @@ jobs:
 
       - name: Run ESLint
         run: eslint src --ext .js,.jsx --format json > eslint.json
+        if: always()
 
       - name: Concatenate JSON Payloads
         run: |
