@@ -22,10 +22,11 @@ jobs:
         run: npm ci
 
       - name: Test
-        run: npm test -- --watchAll=false --coverage=false --json > test_results.json
+        run: npm test -- --watchAll=false --coverage=false --json > output.json
 
       - name: Concatenate JSON Payloads
         run: |
+          tail -n +4 output.json > test_results.json
           test_results=$(cat test_results.json)
           payload=$(jq --argjson test "$test_results" '. + {test: $test}' <<EOF
           {
