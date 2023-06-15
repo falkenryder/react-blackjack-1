@@ -22,11 +22,11 @@ jobs:
         run: npm ci
 
       - name: Test
-        run: npm test -- --watchAll=false --coverage=false --json > tmp/test_results.json
+        run: npm test -- --watchAll=false --coverage=false --json > test_results.json
 
       - name: Concatenate JSON Payloads
         run: |
-          test_results=$(cat tmp/test_results.json)
+          test_results=$(cat test_results.json)
           payload=$(jq --argjson test "$test_results" '. + {test: $test}' <<EOF
           {
             "repo_name": "${{ github.repository }}",
@@ -34,16 +34,16 @@ jobs:
           }
           EOF
           )
-          echo "$payload" > tmp/payload.json
+          echo "$payload" > payload.json
         if: always()
 
       - name: Send JSON to Server
         run: |
-          json_payload=$(cat tmp/payload.json)
+          json_payload=$(cat payload.json)
           signature=$(echo -n "$json_payload" | openssl dgst -sha256 -hmac 'password' | awk '{print $NF}')
           curl -X POST \
             -H "Content-Type: application/json" \
             -H "X-Signature-SHA256: sha256=$signature" \
-            -d @tmp/payload.json \
+            -d @payload.json \
             https://f46d-116-14-38-170.ngrok-free.app/github_payloads
         if: always()
