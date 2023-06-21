@@ -2,32 +2,16 @@ import React from 'react';
 import "../styles/card.css"
 
 export default function Card(props) {
-  // Step 1.5 Destructure the card prop
+  // Destructure the card prop
   const { suit, value, hidden } = props.card;
 
-  // Step 1.6 Modify getCardColour so that it returns the correct card color class based on the suit
+  // Modify getCardColour so that it returns the correct card color class based on the suit
   const getCardColor = (suit) => {
-    if (suit === 'diamonds' || suit === 'hearts') {
-      return 'card red';
-    } else {
-      return 'card black';
-    }
+
   }
 
-  // Step 1.7 Modify renderSuit so that it returns the correct suit symbol based on the suit
+  // Modify renderSuit so that it returns the correct suit symbol based on the suit
   const renderSuit = (suit) => {
-  switch (suit) {
-    case 'spades':
-      return '♠';
-    case 'diamonds':
-      return '♦';
-    case 'clubs':
-      return '♣';
-    case 'hearts':
-      return '♥';
-    default:
-      break;
-  }
 }
 
   if (hidden) {
