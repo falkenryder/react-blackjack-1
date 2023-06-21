@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Card from '../components/Card';
+import Wallet from '../components/Wallet';
 import shuffleDeck from '../utils/shuffleDeck';
 import deckJson from '../deck.json';
 
@@ -11,6 +12,45 @@ describe('shuffleDeck', () => {
     const testDeck = JSON.parse(JSON.stringify(deckJson));
 
     expect(shuffleDeck(testDeck.cards)).not.toEqual(data.cards);
+  });
+});
+
+describe('Wallet', () => {
+  beforeEach(() => {
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    window.alert.mockRestore();
+  });
+
+  it('should call the onBetChange callback and update state when a valid bet is placed', () => {
+    const onBetChange = jest.fn();
+    render(<Wallet gameStatus="bet" onBetChange={onBetChange} />);
+
+    const inputElement = screen.getByLabelText('Place your bet:');
+    const buttonElement = screen.getByRole('button', {name: /Bet/i});
+
+    fireEvent.change(inputElement, { target: { value: '30' } });
+    fireEvent.click(buttonElement);
+
+    expect(onBetChange).toHaveBeenCalledTimes(1);
+    expect(screen.getByText('Bet: $30')).toBeInTheDocument();
+    expect(screen.getByText('Wallet: $70')).toBeInTheDocument();
+  });
+
+  it('should display an error message when an invalid bet is placed', () => {
+    const onBetChange = jest.fn();
+    render(<Wallet gameStatus="bet" onBetChange={onBetChange} />);
+
+    const inputElement = screen.getByLabelText('Place your bet:');
+    const buttonElement = screen.getByRole('button', {name: /Bet/i});
+
+    fireEvent.change(inputElement, { target: { value: '200' } });
+    fireEvent.click(buttonElement);
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+    expect(window.alert).toHaveBeenCalledWith('Invalid bet amount! Please enter a valid amount');
   });
 });
 

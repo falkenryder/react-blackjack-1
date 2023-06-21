@@ -1,0 +1,91 @@
+.btn {
+  background-color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 32px;
+  align-items: center;
+}
+
+.column.scores {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 120px;
+}
+
+button {
+  /* width: 200px; */
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  height: 40px;
+  width: auto;
+  background: #fff;
+  color: #383b3a;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px #ccc;
+  transition: transform 100ms;
+  transition-timing-function: ease;
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 1.5px 1.5px #ccc;
+}
+
+.newGameBtn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.walletContainer {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  width: 160px;
+  padding: 12px 16px 24px 16px;
+  /* margin-top: 40%; */
+  top: 70%;
+  left: 5%;
+  border: 2px solid black;
+
+}
+
+label {
+  white-space: nowrap;
+}
+
+.betContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.betBtn {
+  margin-top: 12px;
+  padding: 0px 18px;
+  width: 300%;
+
+}
+
+.betBtn p{
+  margin: 0;
+  padding: 0;
+}
+
+/* this code removes the up/down arrows from the value input field */
+.betInput {
+  appearance: textfield; /* Remove the default arrows */
+}
+.betInput::-webkit-inner-spin-button,
+.betInput::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* WebKit browsers */
+  margin: 0; /* Remove the default buttons */
+}
+/*  */

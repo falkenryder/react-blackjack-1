@@ -8,21 +8,21 @@
 }
 
 /*  */
-.hit-stand-container {
+.controls-container {
   display: flex;
   justify-content: center;
+  margin-right: 30px;
 }
-  .hit-stand-container.btn{
-  padding: 80px;
-  padding-bottom: 0px;
-  font-size: 26px !important;
-  font-weight: 500 !important;
-  }
-
 
 .stand-btn {
-  margin-left: 30px;
+  color:red;
+  margin-left: 15px;
+}
 
+.hit-btn {
+  color: darkgreen;
+  margin-right: 15px;
+  padding: 8px 15px 8px 15px;
 }
 
 .message-container {
