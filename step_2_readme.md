@@ -122,7 +122,7 @@ A standard deck of poker cards, traditionally has 4 suits and 2 colors:
 | Spades (♠) |  Black |
 
 
-####getCardColor
+#### getCardColor
 Let's implement the getCardColor function, to return us one of 2 strings to be used as the class name, depending on the suit:`card red`, and`card black`. 
 
 #### renderSuit
