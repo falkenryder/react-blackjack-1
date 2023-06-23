@@ -2,7 +2,6 @@ import React from 'react';
 import "../styles/card.css"
 
 export default function Card(props) {
-  // Destructure the card prop
   const { suit, value, hidden } = props.card;
 
   // Modify getCardColour so that it returns the correct card color class based on the suit

@@ -30,7 +30,7 @@ export default function App() {
 
   // Deck state and data
   const data = JSON.parse(JSON.stringify(deckJson));
-  const [deck, setDeck] = useState([]);
+  // Initalize the deck state
 
   // Use useEffect to call the shuffleDeck function when the component is first rendered
 
