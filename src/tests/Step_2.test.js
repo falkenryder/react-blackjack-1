@@ -16,6 +16,18 @@ describe('shuffleDeck', () => {
 });
 
 describe('Wallet', () => {
+  const events = {
+    bet: "bet",
+    playerTurn: "playerTurn",
+    dealerTurn: "dealerTurn",
+    resolve: "resolve",
+    playerWon: "playerWon",
+    dealerWon: "dealerWon",
+    draw: "draw",
+    playerBlackjack: "playerBlackjack",
+    gameOver: "gameOver"
+  };
+
   beforeEach(() => {
     jest.spyOn(window, 'alert').mockImplementation(() => {});
   });
@@ -26,7 +38,7 @@ describe('Wallet', () => {
 
   it('should call the onBetChange callback and update state when a valid bet is placed', () => {
     const onBetChange = jest.fn();
-    render(<Wallet gameStatus="bet" onBetChange={onBetChange} />);
+    render(<Wallet gameStatus={events.bet} onBetChange={onBetChange} events={events}/>);
 
     const inputElement = screen.getByLabelText('Place your bet:');
     const buttonElement = screen.getByRole('button', {name: /Bet/i});
@@ -41,7 +53,7 @@ describe('Wallet', () => {
 
   it('should display an error message when an invalid bet is placed', () => {
     const onBetChange = jest.fn();
-    render(<Wallet gameStatus="bet" onBetChange={onBetChange} />);
+    render(<Wallet gameStatus={events.bet} onBetChange={onBetChange} events={events}/>);
 
     const inputElement = screen.getByLabelText('Place your bet:');
     const buttonElement = screen.getByRole('button', {name: /Bet/i});

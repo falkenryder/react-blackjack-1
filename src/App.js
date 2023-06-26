@@ -71,17 +71,28 @@ export default function App() {
     setGameStatus(events.playerTurn);
   };
 
-    // Create the handleStand function so that the correct steps are implemented after the player clicks the "Stand" button
-    const handleStand = () => {
-      setGameStatus(events.dealerTurn);
-      dealerCards.forEach((card) => {
-        if (card.hidden === true) {
-          card.hidden = false;
-          setDealerCardCount(count => ++count);
-        }
-      });
-      setDealerCards([...dealerCards]);
-    };
+  // Create the handleStand function so that the correct steps are implemented after the player clicks the "Stand" button
+  const handleStand = () => {
+    setGameStatus(events.dealerTurn);
+    dealerCards.forEach((card) => {
+      if (card.hidden === true) {
+        card.hidden = false;
+        setDealerCardCount(count => ++count);
+      }
+    });
+    setDealerCards([...dealerCards]);
+  };
+
+  // Create the handleResetGame function so that the correct steps are implemented after the player clicks the "New Game" button
+  const handleResetGame = () => {
+    setPlayerScore(0);
+    setPlayerCards([]);
+    setDealerScore(0);
+    setDealerCards([]);
+    setDeck(shuffleDeck(data.cards));
+    setMessage(messages.bet);
+    setGameStatus(events.bet);
+  };
 
   // Create a function drawCard that takes a target parameter and draws a card from the deck
   const drawCard = (target) => {
@@ -155,11 +166,14 @@ export default function App() {
         <div className='message-container'>{message && <h1>{message}</h1>}</div>
         {/* Add the Controls component to the App component */}
         {/* Use a arrow function to perform drawCard for the onHit prop */}
-        <Controls gameStatus={gameStatus} onHit={() => drawCard("player")} onStand={handleStand} />
+        {/* Add in the onResetGame prop, and pass it a function handleResetGame */}
+        <Controls gameStatus={gameStatus} onHit={() => drawCard("player")} onStand={handleStand} onResetGame={handleResetGame} events={events}/>
       </div>
       <Hand cards={playerCards} score={playerScore} target="player"/>
       {/* Add the onBetChange event handler to the Wallet component & pass it handleBetChange */}
-      <Wallet gameStatus={gameStatus} onBetChange={handleBetChange} />
+      {/* Add the onGameOver prop to the Wallet component and */}
+      {/* Use a arrow function to setGameStatus to events.gameOver for the prop */}
+      <Wallet gameStatus={gameStatus} onBetChange={handleBetChange} onGameOver={()=> setGameStatus(events.gameOver)} events={events}/>
     </div>
   );
 }
