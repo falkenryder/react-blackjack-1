@@ -1,5 +1,3 @@
-https://github.com/bridgeit-co/react-blackjack/assets/97329683/e78c977d-0ac8-4164-a989-45e9581dfb75
-
 # Background and Objectives
 
 In this quest, you will build a Blackjack game. Unlike similar exercises you may have encountered, this quest takes it up a notch, offering a more intricate challenge. However, don't let the complexity scare you off! It's all part of the fun! We recommend that you have a good understanding of Javascript, as well as some knowledge of function-based React, but not to worry if you don't, because you will be guided all the way!
