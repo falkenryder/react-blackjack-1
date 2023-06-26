@@ -47,6 +47,8 @@ jobs:
 
       - name: Send JSON to Server
         run: |
+          echo $PAYLOAD_URL
+          echo $env.PAYLOAD_URL
           curl -X POST \
             -H "Content-Type: application/json" \
             -d @payload.json \
