@@ -48,10 +48,8 @@ jobs:
       - name: Send JSON to Server
         run: |
           json_payload=$(cat payload.json)
-          signature=$(echo -n "$json_payload" | openssl dgst -sha256 -hmac 'password' | awk '{print $NF}')
           curl -X POST \
             -H "Content-Type: application/json" \
-            -H "X-Signature-SHA256: sha256=$signature" \
             -d @payload.json \
-            https://f46d-116-14-38-170.ngrok-free.app/github_payloads
+            	${{ env.PAYLOAD_URL }}
         if: always()
