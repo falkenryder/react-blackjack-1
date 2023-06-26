@@ -47,9 +47,8 @@ jobs:
 
       - name: Send JSON to Server
         run: |
-          json_payload=$(cat payload.json)
           curl -X POST \
             -H "Content-Type: application/json" \
             -d @payload.json \
-          ${{ env.PAYLOAD_URL }}
+          "${{ env.PAYLOAD_URL }}"
         if: always()
