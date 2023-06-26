@@ -33,6 +33,9 @@ export default function App() {
   // Initalize the deck state
 
   // Use useEffect to call the shuffleDeck function when the component is first rendered
+  useEffect(() => {
+    setDeck(shuffleDeck(data.cards));
+  }, []);
 
   // Event and message states
   const [gameStatus, setGameStatus] = useState(events.bet);

@@ -12,10 +12,14 @@ export default function Wallet(props) {
     e.preventDefault();
     const bet = parseInt(inputValue);
     // Modify placeBet so that the correct states are update if the bet is valid
-
-    alert("Invalid bet amount! Please enter a valid amount");
-    setInputValue("");
-
+    if (bet <= walletAmount && bet >= 10) {
+      setBetAmount(bet);
+      setWalletAmount(w => w - bet);
+      onBetChange();
+    } else {
+      alert("Invalid bet amount! Please enter a valid amount");
+      setInputValue("");
+    }
   };
   return (
     <div className="walletContainer" data-testid="wallet">
