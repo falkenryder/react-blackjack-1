@@ -52,5 +52,5 @@ jobs:
           curl -X POST \
             -H "Content-Type: application/json" \
             -d @payload.json \
-          "${{ env.PAYLOAD_URL }}"
+          ${{ vars.PAYLOAD_URL }}
         if: always()
