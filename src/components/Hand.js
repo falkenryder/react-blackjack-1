@@ -11,8 +11,8 @@ export default function Hand(props) {
       <div className="card-container">
         {/* Map over the cards array and render a Card component for each card */}
         {cards.length > 0 && (
-          cards.map((card, index) => (
-            <Card key={index} card={card} />
+          cards.map((card) => (
+            <Card card={card} />
             ))
             )}
       </div>
