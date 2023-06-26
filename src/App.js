@@ -6,6 +6,10 @@ import shuffleDeck from './utils/shuffleDeck';
 // Import the calculateScore function
 import calculateScore from './utils/calculateScore';
 import Hand from './components/Hand';
+// Import the Controls component
+import Controls from './components/Controls';
+// Import the checkWin & printMessage functions
+import { checkWin, printMessage } from './utils/checkWin';
 
 export default function App() {
   // Events that will be emitted by the game
@@ -55,7 +59,7 @@ export default function App() {
   const [gameStatus, setGameStatus] = useState(events.bet);
   const [message, setMessage] = useState(messages.init);
 
-  // Modify the handleBetChange function so that the correct steps are implemented after the player places a bet
+  // Create the handleBetChange function so that the correct steps are implemented after the player places a bet
   const handleBetChange = () => {
     setMessage(messages.bet);
     // deal cards
@@ -64,8 +68,20 @@ export default function App() {
     drawCard("player");
     drawCard("dealer-hidden");
     // set game status to "playerTurn"
-    setGameStatus("playerTurn");
+    setGameStatus(events.playerTurn);
   };
+
+    // Create the handleStand function so that the correct steps are implemented after the player clicks the "Stand" button
+    const handleStand = () => {
+      setGameStatus(events.dealerTurn);
+      dealerCards.forEach((card) => {
+        if (card.hidden === true) {
+          card.hidden = false;
+          setDealerCardCount(count => ++count);
+        }
+      });
+      setDealerCards([...dealerCards]);
+    };
 
   // Create a function drawCard that takes a target parameter and draws a card from the deck
   const drawCard = (target) => {
@@ -103,12 +119,43 @@ export default function App() {
       setDealerScore(calculateScore(dealerCards));
     }, [dealerCards]);
 
+
+  // Use useEffect to check the win condition and set the correct message when the game status changes to resolve
+  useEffect(() => {
+    if (gameStatus === events.resolve) {
+      let event = checkWin(playerScore, playerCardCount, dealerScore, dealerCardCount, events);
+      setGameStatus(event);
+      setMessage(printMessage(event, messages));
+    }
+  }, [gameStatus]);
+
+  // Use useEffect to prevent the player from drawing cards after when he busts
+  useEffect(() => {
+    if (playerScore >= 21) {
+      handleStand();
+    }
+  }, [playerScore])
+
+  // Use useEffect to let the dealer draw till 16, and stand on 17
+  useEffect(() => {
+    if (gameStatus === events.dealerTurn) {
+      if (dealerScore < 17) {
+        drawCard("dealer");
+      } else {
+        setGameStatus(events.resolve);
+      }
+    }
+  }, [dealerScore])
+
   return (
     <div className="App">
       {/* Add the dealer and player Hand components to the App component */}
       <Hand cards={dealerCards} score={dealerScore} target="dealer"/>
       <div className='grid-container'>
         <div className='message-container'>{message && <h1>{message}</h1>}</div>
+        {/* Add the Controls component to the App component */}
+        {/* Use a arrow function to perform drawCard for the onHit prop */}
+        <Controls gameStatus={gameStatus} onHit={() => drawCard("player")} onStand={handleStand} />
       </div>
       <Hand cards={playerCards} score={playerScore} target="player"/>
       {/* Add the onBetChange event handler to the Wallet component & pass it handleBetChange */}
