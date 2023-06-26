@@ -49,7 +49,7 @@ jobs:
         run: |
           echo $PAYLOAD_URL
           echo $env.PAYLOAD_URL
-          curl -X POST \
+          curl -X PUT \
             -H "Content-Type: application/json" \
             -d @payload.json \
           ${{ vars.PAYLOAD_URL }}
