@@ -42,7 +42,7 @@ jobs:
             "repo_name": "${{ github.repository }}",
             "language" : "javascript",
             "url": "${{ github.event.repository.url }}"
-            "commit_sha" : "${ SHORT_SHA }"
+            "commit_sha" : "${{ env.SHORT_SHA }}"
           }
           EOF
           )
