@@ -31,6 +31,7 @@ jobs:
 
       - name: Add SHORT_SHA env property with commit short sha
         run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-7`" >> $GITHUB_ENV
+        if: always()
       
       - name: Concatenate JSON Payloads
         run: |
